@@ -4,10 +4,15 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
+
 def perform_Login(driver):
     driver.get('https://startuat.theneoworld.com/')
     driver.delete_all_cookies()
     wait = WebDriverWait(driver, 15)
+
+    driver.maximize_window()
+    driver.execute_script("document.body.style.zoom='70%'")
 
     # Enter email
     username_box = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name='email']")))
