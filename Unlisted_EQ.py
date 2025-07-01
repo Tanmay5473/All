@@ -110,7 +110,7 @@ Offline_consent.click()
 wait_for_loader_to_disappear(max_wait =60, poll_interval=1)
 
 #Step 14: Upload Consent
-Consent = wait.until(presence_of_element_located((By.XPATH, '/html/body/app-root/app-place-order-cxodashboard/div[2]/div/div/div[1]/div/div[2]/form/div[2]/div/div[1]/div[5]/div[1]/input')))
+Consent = wait.until(presence_of_element_located((By.XPATH, '/html/body/app-root/app-place-order-cxodashboard/div[2]/div/div/div[1]/div/div[2]/form/div[2]/div/div[1]/div[5]/div[2]/input')))
 # driver.execute_script("arguments[0]scrollIntoView();", Consent)
 file_input = r'C:\Users\TanmayRane\Downloads\Non-Individual (4)\NEO000006898-KRA-1.pdf'
 Consent.send_keys(file_input)
