@@ -65,8 +65,8 @@ client.click()
 wait_for_loader_to_disappear(max_wait =60, poll_interval=1)
 
 #Step 5: Click on Listed EQ tab
-unlisted_EQ = wait.until(EC.presence_of_element_located((By.XPATH, '/html/body/app-root/app-place-order-cxodashboard/div[2]/div/div/div[1]/div/div[1]/ul/li[3]/button')))
-unlisted_EQ.click()
+Listed = wait.until(EC.presence_of_element_located((By.XPATH, '/html/body/app-root/app-place-order-cxodashboard/div[2]/div/div/div[1]/div/div[1]/ul/li[3]/button')))
+Listed.click()
 wait_for_loader_to_disappear(max_wait =60, poll_interval=1)
 
 #Select Security

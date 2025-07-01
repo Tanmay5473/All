@@ -67,75 +67,80 @@ client = wait_scroll_click(By.CSS_SELECTOR, '#inProgress > div > div.divTable.da
 client.click()
 wait_for_loader_to_disappear(max_wait =60, poll_interval=1)
 
-#Step 5: Click on Mutual Funds tab/
-MF = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '#pills-nse-tab')))
-MF.click()
+#Step 5: Click on AIF Tab
+AIF = wait.until(EC.presence_of_element_located((By.TAG_NAME, 'AIF')))
+AIF.click()
 wait_for_loader_to_disappear(max_wait =60, poll_interval=1)
 
-#Step 6: Select UCC Code
-UCC_code = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[2]/div/div/div[1]/div/div[2]/form/div/div[1]/mat-form-field/div[1]/div[2]/div/mat-select/div/div[1]')
-UCC_code.click()
+#Select Transaction Type
+
+#Step 6: Trade Date
+Trade_Date = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[2]/div/div/div[1]/div/form/div[2]/div[1]/label/mat-form-field/div[1]/div[2]/div[1]/input')
+Trade_Date.clear()
+Trade_Date.send_keys(today_str)
 wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
 
-#Step 7: Click to Select UCC
-UCC_select = wait_scroll_click(By.XPATH, '/html/body/div[2]/div[2]/div/div/mat-option[1]')
-UCC_select.click()
+#Step 7: Select Manufacturer
+Manufacturer = wait_scroll_click(By.XPATH, '/html/body/app-root/app-aif-place-order/div[2]/div/div/div/div/div[2]/form/div/div[3]/div/div[1]/mat-form-field/div[1]/div[2]/div/input').click()
+Select_Manufacturer = wait_scroll_click(By.XPATH, '/html/body/div[2]/div/div/div/mat-option[1]').click()
 wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
 
-#Step 8: Click Proceed
-Proceed = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[2]/div/div/div[1]/div/div[2]/form/div/div[2]/div/button')
-Proceed.click()
+#Step 8: Select Scheme
+Scheme = wait_scroll_click(By.XPATH, '/html/body/app-root/app-aif-place-order/div[2]/div/div/div/div/div[2]/form/div/div[4]/div/div[1]/mat-form-field/div[1]/div[2]/div/input').click()
+Scheme_select = wait_scroll_click(By.XPATH, '/html/body/div[2]/div/div/div/mat-option[1]/span').click()
 wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
 
-#Step 9: Enter Date
-Date = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[2]/div/div/div[1]/div/form/div[2]/div[1]/label/mat-form-field/div[1]/div[2]/div[1]/input')
-Date.clear()
-Date.send_keys(today_str)
+#Step 9: Enter Folio Number
+Folio_no = wait_scroll_click(By.XPATH, '/html/body/app-root/app-aif-place-order/div[2]/div/div/div/div/div[2]/form/div/div[6]/label/input')
+Folio_no.send_keys('1234455')
 wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
 
-#Step 10: Select AMC Name
-AMC_Name = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[2]/div/div/div[1]/div/form/div[2]/div[2]/div/div[1]/mat-form-field/div[1]/div[2]/div/input').click()
-AMC_select = wait_scroll_click(By.XPATH, '/html/body/div[2]/div/div/div/mat-option[1]/span').click()
+#Step 10: Enter Commitment Amount
+Cmitmnt_AMT = wait_scroll_click(By.XPATH, '/html/body/app-root/app-aif-place-order/div[2]/div/div/div/div/div[2]/form/div/div[7]/label/input').send_keys('2,00,00,000')
 wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
 
-#Step 11: Select Scheme Name
-Scheme_Name = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[2]/div/div/div[1]/div/form/div[2]/div[3]/div/div[1]/mat-form-field/div[1]/div[2]/div/input').click()
-Scheme_selec = wait_scroll_click(By.XPATH, '/html/body/div[2]/div/div/div/mat-option[1]/span').click()
+#Step 11: Drawn AMT
+Drawn_AMT = wait_scroll_click(By.XPATH, '/html/body/app-root/app-aif-place-order/div[2]/div/div/div/div/div[2]/form/div/div[8]/label/input').send_keys('1,00,00,000')
 wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
 
-#Step 12: Enter Amount
-Amount = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[2]/div/div/div[1]/div/form/div[2]/div[9]/div[1]/label/div/input')
-Amount.send_keys('10,000')
+# step 12: Equalization amount
+Equi_AMT = wait_scroll_click(By.XPATH, '/html/body/app-root/app-aif-place-order/div[2]/div/div/div/div/div[2]/form/div/div[9]/label/input').send_keys('1,00,00,000')
 wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
 
 #Step 13: Click Consent
 driver.execute_script("window.scrollBy(0, 500);")
-Check_Consent = wait_scroll_click(By.XPATH, '//*[@id="flexCheckDefault"]').click()
+clk_Cnst = wait_scroll_click(By.XPATH, '//*[@id="flexCheckDefault"]').click()
 wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
 
 #Step 14: Upload DOcument
-Document = wait.until(presence_of_element_located((By.XPATH, '/html/body/app-root/app-mf-place-order/div[2]/div/div/div[1]/div/form/div[2]/div[14]/div[2]/input')))
+Docmnt = wait.until(presence_of_element_located((By.XPATH, '/html/body/app-root/app-mf-place-order/div[2]/div/div/div[1]/div/form/div[2]/div[14]/div[2]/input')))
 # driver.execute_script("arguments[0]scrollIntoView();", Consent)
 file_input = r'C:\Users\TanmayRane\Downloads\Non-Individual (4)\NEO000006898-KRA-1.pdf'
-Document.send_keys(file_input)
+Docmnt.send_keys(file_input)
 
 #Step 15: Add to cart
-Ad_cart = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[2]/div/div/div[1]/div/form/div[2]/div[15]/button[1]')
-Ad_cart.click()
+Adv_cart = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[2]/div/div/div[1]/div/form/div[2]/div[15]/button[1]')
+Adv_cart.click()
 wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
-Ok = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[2]/div/div/div[2]/div/button')
-Ok.click()
+Oki = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[2]/div/div/div[2]/div/button')
+Oki.click()
 wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
 
 #Step 16: View Cart
-Vw_Cart = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[2]/div/div/div[1]/div/form/div[2]/div[15]/button[2]').click()
+Vwe_Cart = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[2]/div/div/div[1]/div/form/div[2]/div[15]/button[2]').click()
 wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
 
 #Step 17: Submit
-Sub = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[3]/div/div/div/div/button').click()
+Subm = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[3]/div/div/div/div/button').click()
 wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
-Yess = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[3]/div/div/div/div[2]/div/button[1]').click()
+Yesss = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[3]/div/div/div/div[2]/div/button[1]').click()
 wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
+
+
+
+
+
+
 
 
 
