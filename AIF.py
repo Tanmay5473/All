@@ -68,8 +68,11 @@ client.click()
 wait_for_loader_to_disappear(max_wait =60, poll_interval=1)
 
 #Step 5: Click on AIF Tab
-AIF = wait.until(EC.presence_of_element_located((By.TAG_NAME, 'AIF')))
-AIF.click()
+aif_button = WebDriverWait(driver, 10).until(
+    EC.element_to_be_clickable((By.XPATH, "//button[@id='pills-nse-tab' and normalize-space()='AIF']"))
+)
+aif_button.click()
+
 wait_for_loader_to_disappear(max_wait =60, poll_interval=1)
 
 #Select Transaction Type

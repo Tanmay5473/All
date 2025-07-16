@@ -67,7 +67,7 @@ client = wait_scroll_click(By.CSS_SELECTOR, '#inProgress > div > div.divTable.da
 client.click()
 wait_for_loader_to_disappear(max_wait =60, poll_interval=1)
 
-#Step 5: Click on Mutual Funds tab/
+#Step 5: Click on Mutual Funds tab
 MF = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '#pills-nse-tab')))
 MF.click()
 wait_for_loader_to_disappear(max_wait =60, poll_interval=1)
@@ -88,19 +88,23 @@ Proceed.click()
 wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
 
 #Step 9: Enter Date
-Date = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[2]/div/div/div[1]/div/form/div[2]/div[1]/label/mat-form-field/div[1]/div[2]/div[1]/input')
+Date = wait.until(presence_of_element_located((By.XPATH, '/html/body/app-root/app-mf-place-order/div[2]/div/div/div[1]/div/form/div[2]/div[1]/label/mat-form-field/div[1]/div[2]/div[1]/input')))
 Date.clear()
 Date.send_keys(today_str)
 wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
 
 #Step 10: Select AMC Name
-AMC_Name = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[2]/div/div/div[1]/div/form/div[2]/div[2]/div/div[1]/mat-form-field/div[1]/div[2]/div/input').click()
-AMC_select = wait_scroll_click(By.XPATH, '/html/body/div[2]/div/div/div/mat-option[1]/span').click()
+amc_input = WebDriverWait(driver, 10).until(
+    EC.presence_of_element_located((By.XPATH, "//input[@formcontrolname='amcName' and @type='text']"))
+)
+amc_input.send_keys("360_ONE_MUTUALFUND_MF")
+
+AMC_select = wait_scroll_click(By.XPATH, '/html/body/div[2]/div/div/div/mat-option/span').click()
 wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
 
 #Step 11: Select Scheme Name
-Scheme_Name = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[2]/div/div/div[1]/div/form/div[2]/div[3]/div/div[1]/mat-form-field/div[1]/div[2]/div/input').click()
-Scheme_selec = wait_scroll_click(By.XPATH, '/html/body/div[2]/div/div/div/mat-option[1]/span').click()
+Scheme_Name = wait_scroll_click(By.XPATH, "//input[@formcontrolname='schemaName' and @type='text']").send_keys("360 ONE BALANCED HYBRID FUND - REGULAR PLAN - GROWTH | IIIBHRG-GR")
+Scheme_selec = wait_scroll_click(By.XPATH,  "//span[normalize-space()='360 ONE BALANCED HYBRID FUND - REGULAR PLAN - GROWTH | IIIBHRG-GR']").click()
 wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
 
 #Step 12: Enter Amount
@@ -136,6 +140,3 @@ Sub = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[3]
 wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
 Yess = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[3]/div/div/div/div[2]/div/button[1]').click()
 wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
-
-
-

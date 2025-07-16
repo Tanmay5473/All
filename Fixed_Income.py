@@ -79,13 +79,22 @@ click_ok.click()
 wait_for_loader_to_disappear()
 
 # Step 13: View Cart
-view_cart = wait_scroll_click(By.XPATH, '//*[@id=" "]/div[2]/button[2]')
-view_cart.click()
+view_cart_btn = WebDriverWait(driver, 30).until(
+    EC.element_to_be_clickable((By.XPATH, "//button[normalize-space()='View Cart' and contains(@class, 'btnSubmit')]"))
+)
+driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", view_cart_btn)
+view_cart_btn.click()
 wait_for_loader_to_disappear()
 
+
 # Step 14: Submit Cart
-Submit = wait_scroll_click(By.XPATH, '//*[@id="filterSubmit"]')
-Submit.click()
+submit_btn = WebDriverWait(driver, 30).until(
+    EC.element_to_be_clickable((
+        By.XPATH,
+        "(//button[normalize-space()='Submit' and @id='filterSubmit'])[last()]"
+    ))
+)
+submit_btn.click()
 wait_for_loader_to_disappear()
 
 # Step 15: Confirm Submit
