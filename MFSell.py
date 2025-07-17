@@ -55,7 +55,7 @@ Create_Fixed_Income(driver)
 
 # Step 2: Wait for OMS Dashboard
 wait = WebDriverWait(driver, 15)
-wait.until(EC.url_contains("oms_dashboard"))
+wait.until(EC.url_contains("/oms_dashboard"))
 
 # Step 3: Enter client code
 client_code = wait.until(EC.presence_of_element_located((By.XPATH, '/html/body/app-root/app-dashboard-oms/div[3]/div/div/ul/li/label/input')))
@@ -71,3 +71,84 @@ wait_for_loader_to_disappear(max_wait =60, poll_interval=1)
 MF = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '#pills-nse-tab')))
 MF.click()
 wait_for_loader_to_disappear(max_wait =60, poll_interval=1)
+
+#Step 6: Select UCC Code
+UCC_code = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[2]/div/div/div[1]/div/div[2]/form/div/div[1]/mat-form-field/div[1]/div[2]/div/mat-select/div/div[1]')
+UCC_code.click()
+wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
+
+#Step 7: Click to Select UCC
+UCC_select = wait_scroll_click(By.XPATH, '/html/body/div[2]/div[2]/div/div/mat-option[1]')
+UCC_select.click()
+wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
+
+#Step 8: Click Proceed
+Proceed = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[2]/div/div/div[1]/div/div[2]/form/div/div[2]/div/button')
+Proceed.click()
+wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
+
+#Step 9: Click Redemption
+Redemption = (wait_scroll_click(By.XPATH, "//input[@type='radio' and @formcontrolname='transactionTypeList' and @id='2']").click())
+wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
+
+#Step 10: Enter Date
+Date = wait.until(presence_of_element_located((By.XPATH, '/html/body/app-root/app-mf-place-order/div[2]/div/div/div[1]/div/form/div[2]/div[1]/label/mat-form-field/div[1]/div[2]/div[1]/input')))
+Date.clear()
+Date.send_keys(today_str)
+wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
+
+#Step 11: Enter AMC Name
+amc_input = WebDriverWait(driver, 10).until(
+    EC.presence_of_element_located((By.XPATH, "//input[@formcontrolname='amcName' and @type='text']"))
+)
+amc_input.send_keys("HDFCMUTUALFUND_MF")
+
+AMC_select = wait_scroll_click(By.XPATH, "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), 'HDFCMUTUALFUND_MF')]").click()
+wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
+
+#Step 12: Select Scheme Name
+Scheme_Name = wait_scroll_click(By.XPATH, "//input[@aria-label='Number' and @formcontrolname='schemaName']").send_keys("HDFC FOCUSED 30 FUND - REGULAR PLAN - GROWTH | CORG")
+Scheme_selec = wait_scroll_click(By.XPATH,  "//span[normalize-space()='HDFC FOCUSED 30 FUND - REGULAR PLAN - GROWTH | CORG']").click()
+wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
+
+#Step 13: Select Folio number
+Folio_num = wait_scroll_click(By.XPATH, "//input[@formcontrolname='folioNo' and @aria-required='true' and @autocomplete='off']").click()
+sel_folio = wait_scroll_click(By.XPATH, "//mat-option[@role='option' and .//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '23849099/97')]]").click()
+wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
+
+#Step 14: Order By
+Reedem_all = wait_scroll_click(By.XPATH, "//input[@formcontrolname='allRedeem' and @value='false']").click()
+wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
+
+#Step 15: Enter Units
+Units = wait_scroll_click(By.XPATH, "//input[@formcontrolname='units']")
+prefilled_units = Units.get_attribute("value")
+print(prefilled_units)
+
+if prefilled_units >= "100":
+    Units.clear()
+    Units.send_keys("100")
+else:
+    print("You dont have enough Units to Reedem")
+
+wait_for_loader_to_disappear(max_wait=60,poll_interval=1)
+
+#Step 16: Upload Consent
+driver.execute_script("window.scrollBy(0, 500);")
+Check_Consent = wait_scroll_click(By.XPATH, "//input[@formcontrolname='consentWaiver']").click()
+wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
+
+#Step 17: Upload DOcument
+Document = wait.until(presence_of_element_located((By.XPATH, "//input[@formcontrolname='documentData']")))
+# driver.execute_script("arguments[0]scrollIntoView();", Consent)
+file_input = r'C:\Users\TanmayRane\Downloads\Non-Individual (4)\NEO000006898-KRA-1.pdf'
+Document.send_keys(file_input)
+
+#Step 18: Add to cart
+Ad_cart = wait_scroll_click(By.XPATH, "//button[@id='filterSubmit' and text()='Add to Cart']")
+Ad_cart.click()
+wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
+Ok = wait_scroll_click(By.XPATH, '/html/body/app-root/app-mf-place-order/div[2]/div/div/div[2]/div/button')
+Ok.click()
+wait_for_loader_to_disappear(max_wait=60, poll_interval=1)
+
